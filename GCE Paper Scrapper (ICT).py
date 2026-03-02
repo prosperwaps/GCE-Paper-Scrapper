@@ -9,8 +9,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # CONFIG
 # ===================================
 
-START_URL = "https://cameroongcerevision.com/a-level/cameroon-gce-questions-mathematics-a-level/"
-SAVE_FOLDER = "GCE-MATH"
+START_URL = "https://cameroongcerevision.com/a-level/cameroon-gce-questions-a-level-ict/"
+SAVE_FOLDER = "GCE-ICT"
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 

@@ -9,8 +9,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # CONFIG
 # ===================================
 
-START_URL = "https://cameroongcerevision.com/a-level/cameroon-gce-questions-mathematics-a-level/"
-SAVE_FOLDER = "GCE-MATH"
+START_URL = "https://cameroongcerevision.com/a-level/cameroon-gce-questions-a-level-physics/"
+SAVE_FOLDER = "GCE-PHYSICS"
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
@@ -32,14 +32,14 @@ session.headers.update(HEADERS)
 def is_valid_math_page(url):
     url = url.lower()
 
-    if "math" not in url:
+    if "Physics" not in url:
         return False
 
     banned = [
         "chemistry", "biology", "economics",
         "geography", "commerce", "entrepreneur",
         "religious", "history", "computer-science",
-        "o-level"
+        "o-level", "math" 
     ]
 
     return not any(word in url for word in banned)
