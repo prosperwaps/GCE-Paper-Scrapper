@@ -1,8 +1,9 @@
-.....﻿
+﻿
 # 📝 GCE PDF Scraper (Cameroon Special)
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![CI](https://github.com/prosperwaps/GCE-Paper-Scrapper/actions/workflows/ci.yml/badge.svg)](https://github.com/prosperwaps/GCE-Paper-Scrapper/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-MIT-green)](#-license)
 
 A fast and reliable Python script to automatically download **A-Level past questions For all science subjects** from [Cameroon GCE Revision](https://cameroongcerevision.com/a-level/cameroon-gce-questions-mathematics-a-level/).
 [Cameroon GCE Revision](https://cameroongcerevision.com/a-level/june-chemistry-a-level/).
@@ -31,11 +32,11 @@ It organizes PDFs by year, handles Google Drive embeds, and ensures only valid P
 
 ## ⚙️ Requirements
 
-* Python 3.8 or higher
+* Python 3.9 or higher
 * Required packages:
 
 ```bash
-pip install requests beautifulsoup4
+pip install -r requirements.txt
 ```
 
 ---
@@ -43,35 +44,36 @@ pip install requests beautifulsoup4
 ## 📦 Usage
 
 1. Clone or download the repository.
-2. Run the script partaning to the Subject you want to get
+2. Run the script for the subject you want (quote the name — it contains spaces and parentheses).
+   You can also run any subject through the shared engine: `python gce_scraper.py physics` (options: `--out DIR`, `--workers N`).
 
 ## Mathematics
 ```bash
-python GCE Paper Scrapper (Math).py
+python "GCE Paper Scrapper (Math).py"
 ```
 ## Chemistry
 ```bash
-python GCE Paper Scrapper (Chemistry).py
+python "GCE Paper Scrapper (Chemistry).py"
 ```
 ## Physics
 ```bash
-python GCE Paper Scrapper (Physics).py
+python "GCE Paper Scrapper (Physics).py"
 ```
 ## Biology
 ```bash
-python GCE Paper Scrapper (Biology).py
+python "GCE Paper Scrapper (Biology).py"
 ```
 ## Further-Math
 ```bash
-python GCE Paper Scrapper (Further Math).py
+python "GCE Paper Scrapper (Further Math).py"
 ```
 ## ICT
 ```bash
-python GCE Paper Scrapper (ICT).py
+python "GCE Paper Scrapper (ICT).py"
 ```
 ## Computer Science
 ```bash
-python GCE Paper Scrapper (Computer Science).py
+python "GCE Paper Scrapper (Computer Science).py"
 ```
 
 3. PDFs will be downloaded into the `GCE_(SUBJECT)` folder, automatically sorted by year.
@@ -93,7 +95,9 @@ python GCE Paper Scrapper (Computer Science).py
 ## ⚠️ Notes
 
 * Uses **multi-threading** (`ThreadPoolExecutor`) for faster downloads.
-* Already downloaded files are skipped automatically.
+* Already downloaded files are skipped automatically, so re-running only fetches what's missing or failed.
+* Downloads are written to a temporary `.part` file and moved into place only when complete, so an interrupted run never leaves a half-written PDF.
+* Only pages on `cameroongcerevision.com` are scanned, and only real PDFs (checked by file signature) are kept.
 * PDFs without a detectable year are stored in `Unknown_Year`.
 
 ---
@@ -110,6 +114,19 @@ GCE_(SUBJECT)/
 └── Unknown_Year/
     └── paper.pdf
 ```
+
+---
+
+## 🧪 Development
+
+All logic lives in `gce_scraper.py`; the seven `GCE Paper Scrapper (…).py` files are thin launchers.
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+See [SECURITY.md](SECURITY.md) for the threat model and security review.
 
 ---
 
